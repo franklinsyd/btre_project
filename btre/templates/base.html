@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css'%}">
    <!-- Lightbox -->
    <link rel="stylesheet" href="{% static 'css/lightbox.min.css'%}">
-    <title>BT Real Estate</title>
+    <title>BT Real Estate | {% block title %}{% endblock %}</title>
 </head>
 <body>
    <!--Top bar-->
@@ -23,7 +23,8 @@
    {% include 'partials/_navbar.html' %}
 
    <!--Main content-->
-   {% block content %} {% endblock %}  <!-- Very important line. It renders the base theme to other pages-->
+   {% block content %}
+   {% endblock %}  <!-- Very important line. It renders the base theme to other pages-->
    
    <!--Footer-->
   

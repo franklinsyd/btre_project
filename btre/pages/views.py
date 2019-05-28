@@ -1,8 +1,32 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from listings.models import Listing
+from realtors.models import Realtor
+from listings.choices import price_choices,bedroom_choices,state_choices # from the choices file in the listings app
+
 def index(request):
-    return render(request,'pages/index.html') # from the pages folder in templates
+    listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
+    
+    context = {
+        'listings': listings,
+        'state_choices':state_choices,
+        'bedroom_choices':bedroom_choices,
+        'price_choices':price_choices
+    }
+
+    return render(request,'pages/index.html', context) # from the pages folder in templates
 
 def about(request):
-    return render(request,'pages/about.html')
+    
+    #Get all realtors from DB and order by hire_date in descending order
+    realtors = Realtor.objects.order_by('-hire_date')
+
+    #Get MVP - Seller of the month
+    mvp_realtors = Realtor.objects.all().filter(is_mvp=True)
+    
+    context = {
+        'realtors': realtors,
+        'mvp_realtors': mvp_realtors
+    }
+    return render(request,'pages/about.html', context)
