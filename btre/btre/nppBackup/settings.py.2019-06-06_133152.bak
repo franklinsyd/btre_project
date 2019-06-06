@@ -85,8 +85,8 @@ DATABASES = {
         'NAME': 'btredb',
         'USER': 'postgres',
         'PASSWORD': 'root',
-        'HOST': 'localhost'
-        #'PORT': '9999'
+        'HOST': 'localhost',
+        'PORT': '9999'
     }
 }
 
